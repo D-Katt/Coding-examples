@@ -32,21 +32,22 @@ for i in range(limit):
                 if nums[i] + nums[j] + nums[z] + nums[x] == target:
                     # Элементы последовательности не упорядочены, и среди них
                     # могут встречаться одинаковые числа. Поэтому при нахождении
-                    # очередной комбинации, дающей искомую сумму,
-                    # необходимо проверить, что такой набор чисел не встречался раньше.
+                    # очередной комбинации, дающей искомую сумму, необходимо избежать
+                    # дублирования одинаковых решений.
                     # Составляем список из четырех найденных чисел и сортируем его.
                     cur_combination = [nums[i], nums[j], nums[z], nums[x]]
                     cur_combination.sort()
-                    # Если такой набор чисел в возрастающей последовательности
-                    # не встречался раньше, добавляем его в множество solutions.
-                    cur_combination = tuple(cur_combination)
-                    if cur_combination not in solutions:
-                        solutions.add(cur_combination)
+                    # Добавляем в множество solutions в виде кортежа.
+                    solutions.add(tuple(cur_combination))  # Одинаковые кортежи
+                    # будут преобразованы в один уникальный элемент.
 
-# Выбодим возможные варианты сочетаний чисел:
-for solution in solutions:
-    for number in solution:
-        # Для улучшения визуального восприятия итоговых данных
-        # выравниваем числа по правому краю и добавляем пробелы.
-        print(str(number).rjust(8), end=' ')
-    print()
+if not solutions:  # Если в множестве нет элементов, искомая комбиная не существует.
+    print("No combinations of 4 integers adding up to {} found.".format(target))
+else:
+    # В противном случае выбодим возможные варианты сочетаний цифр:
+    for solution in solutions:
+        for number in solution:
+            # Для улучшения визуального восприятия итоговых данных
+            # выравниваем числа по правому краю и добавляем пробелы.
+            print(str(number).rjust(8), end=' ')
+        print()
