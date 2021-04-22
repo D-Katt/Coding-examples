@@ -18,28 +18,24 @@
 x = int(input())
 
 max_result = x
-max_control = x
-max1 = x
-max2 = x
-max3 = x
-max4 = x
-max5 = x
+
+latest1 = x
+latest2 = x
+latest3 = x
+latest4 = x
+latest5 = x
 
 while x != 0:
-    if x > max_control:
-        max_control = x
-        max_result = max1
-        max1 = max2
-        max2 = max3
-        max3 = max4
-        max4 = max5
-        max5 = x
-    else:
-        max_result = max1
-        max1 = max2
-        max2 = max3
-        max3 = max4
-        max4 = max5
+
+    if latest1 > max_result:
+        max_result = latest1
+
+    latest1 = latest2
+    latest2 = latest3
+    latest3 = latest4
+    latest4 = latest5
+    latest5 = x
+
     x = int(input())
 
 print(max_result)
